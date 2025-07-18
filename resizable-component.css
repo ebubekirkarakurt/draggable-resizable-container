@@ -1,0 +1,74 @@
+.resizable-container {
+  width: 500px;
+  height: 350px;
+  border: 1.5px solid #dee2e6;
+  resize: both;
+  overflow: hidden;
+  border-radius: 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+  background-color: #ffffff;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  position: absolute;
+  cursor: move;
+  user-select: none;
+  
+}
+
+.resizable-container.dragging {
+  opacity: 0.8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Resize handle'ın görünür olmasını sağlar */
+.resizable-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(-45deg, #adb5bd 50%, transparent 0);
+  cursor: se-resize;
+}
+
+.small-box {
+  width: 200px;
+  height: 100px;
+  background-color: #adb5bd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.small-box:hover {
+  background-color: #495057;
+}
+
+.top-right-box {
+  border-radius: 100%;
+  padding: 4%;
+  display: flex;
+  position: relative;  
+  bottom: 34%;           
+  left: 26%;         
+  background-color: gray;
+}
+
+.blink {
+  animation: blink-animation 1s infinite;
+}
+
+@keyframes blink-animation {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
