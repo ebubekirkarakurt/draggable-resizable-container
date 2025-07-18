@@ -23,7 +23,6 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Resize handle'ın görünür olmasını sağlar */
 .resizable-container::after {
   content: '';
   position: absolute;

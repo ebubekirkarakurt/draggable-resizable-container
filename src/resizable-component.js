@@ -6,9 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isDragging = false;
   let offsetX, offsetY;
 
-  // Sürükleme işlemi için event listener'lar
   container.addEventListener('mousedown', (e) => {
-    // Eğer kullanıcı resize handle'ını tıklarsa sürükleme yapma
     const isResizeHandle = e.offsetX > container.offsetWidth - 15 && 
                           e.offsetY > container.offsetHeight - 15;
     
