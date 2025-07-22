@@ -1,0 +1,23 @@
+{
+  "name": "resizable-container",
+  "version": "1.0.0",
+  "description": "A resizable and draggable container component for React, frameworks, or native JavaScript",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebubekirkarakurt/resizable-container.git"
+  },
+  "keywords": [
+    "react",
+    "resizable",
+    "container",
+    "draggable",
+    "responsive"
+  ],
+  "author": {
+    "name": "Ebubekir Karakurt",
+    "email": "1ebubekirkarakurt@gmail.com",
+    "url": "https://github.com/ebubekirkarakurt/resizable-container"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ebubekirkarakurt/resizable-container#readme"
+}
