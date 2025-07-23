@@ -1,11 +1,13 @@
 {
-  "name": "resizable-container",
-  "version": "1.0.0",
+  "name": "draggable-resizable-container",
+  "version": "1.1.0",
   "description": "A resizable and draggable container component for React, frameworks, or native JavaScript",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ebubekirkarakurt/resizable-container.git"
   },
+  "main": "./src/react/index.js",
+  "types": "./src/react/components/index.d.ts",
   "keywords": [
     "react",
     "resizable",
@@ -19,5 +21,12 @@
     "url": "https://github.com/ebubekirkarakurt/resizable-container"
   },
   "license": "MIT",
-  "homepage": "https://github.com/ebubekirkarakurt/resizable-container#readme"
+  "homepage": "https://github.com/ebubekirkarakurt/resizable-container#readme",
+  "dependencies": {
+    "@types/react": "^19.1.8",
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0"
+  }
 }
