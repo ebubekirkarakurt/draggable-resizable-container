@@ -10,5 +10,5 @@
     "rootDir": "src",
     "jsx": "react"
   },
-  "include": ["src", "dist/draggable-resizable-component.js"]
+  "include": ["src", "dist/draggable-resizable-component.js", "public/draggable-resizable-component.js"]
 }
