@@ -1,16 +1,16 @@
 {
   "name": "draggable-resizable-container",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A resizable and draggable container component for React, frameworks, or native JavaScript",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ebubekirkarakurt/resizable-container.git"
   },
-  "main": "src/react/index.js",                 
-  "types": "src/react/components/index.d.ts",    
-  "style": "dist/style.css",                     
-  "unpkg": "dist/index.js",                      
-  "jsdelivr": "dist/index.js",
+  "main": "src/react/index.js",
+  "types": "src/react/components/index.d.ts",
+  "style": "dist/draggable-resizable-component.css",
+  "unpkg": "dist/draggable-resizable-component.js",
+  "jsdelivr": "dist/draggable-resizable-component.js",
   "files": [
     "src/react",
     "dist"
@@ -34,10 +34,14 @@
     "react": "^19.1.0"
   },
   "devDependencies": {
-    "@types/node": "^24.1.0"
+    "@types/node": "^24.1.0",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^6.0.1"
   },
   "scripts": {
-    "build": "npm run build:cdn",
-    "build:cdn": "mkdir -p dist && cp public/index.js dist/ && cp public/style.css dist/"
+    "build": "npm run clean && npm run build:cdn",
+    "clean": "rimraf dist",
+    "build:cdn": "mkdir dist && copyfiles public/draggable-resizable-component.* dist/"
   }
+
 }
