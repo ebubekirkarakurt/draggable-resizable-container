@@ -41,7 +41,7 @@
   "scripts": {
     "build": "npm run clean && npm run build:cdn",
     "clean": "rimraf dist",
-    "build:cdn": "mkdir dist && copyfiles public/draggable-resizable-component.* dist/"
+    "build:cdn": "mkdir dist && copyfiles -f public/draggable-resizable-component.* dist"
   }
 
 }
