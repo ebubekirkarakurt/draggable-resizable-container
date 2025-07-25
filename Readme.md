@@ -77,7 +77,7 @@ export default App;
       { id: 4, title: "Sensor 4", alarmStatus: 0 },
       { id: 5, title: "Sensor 5", alarmStatus: 1 },
     ],
-    soundSrc: "/sound.mp3",
+    soundSrc: "/sound.mp3",(or)"https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
     onBoxClick: (id) => console.log("Clicked box ID:", id),
   });
 </script>
