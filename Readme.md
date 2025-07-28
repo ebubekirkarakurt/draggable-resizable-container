@@ -105,8 +105,9 @@ export default App;
 
 ## 🧪 Live Demo
 
-> ⚠️ Live demo is not yet published.  
-> A hosted demo link will be added soon!
+🌐 **Live URL:**  
+🔗 [draggable-resizable-container.vercel.app](https://draggable-resizable-container.vercel.app)
+
 
 ---
 
@@ -132,7 +133,7 @@ draggable-resizable-container/
 - [x] Sound integration on animation/alarm
 - [x] Box click handler
 - [x] CDN support
-- [ ] Live demo page (coming soon)
+- [x] Live demo page (coming soon)
 
 ---
 
