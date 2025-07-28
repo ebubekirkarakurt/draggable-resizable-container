@@ -1,0 +1,49 @@
+.props-table-wrapper {
+  margin-top: 2rem;
+  color: #f8f9fa;
+  overflow-x: auto; 
+}
+
+.props-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #121c2f;
+  border: 1px solid #2c3e50;
+  min-width: 500px;
+}
+
+.props-table th,
+.props-table td {
+  padding: 10px 14px;
+  border: 1px solid #2c3e50;
+  text-align: left;
+}
+
+.props-table th {
+  background-color: #1f2d45;
+  font-weight: bold;
+}
+
+.props-table code {
+  background-color: #2c3e50;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+@media (max-width: 768px) {
+  .props-table-wrapper {
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .props-table {
+    font-size: 0.85rem;
+  }
+
+  .props-table th,
+  .props-table td {
+    padding: 8px 10px;
+  }
+}

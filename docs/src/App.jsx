@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Installation from './components/Installation'
 import SideMenu from './components/SideMenu'
 import SimpleUsage from './components/SimpleUsage'
+import Props from './components/Props'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Header />
         <Installation code='> npm i draggable-resizable-container' />
         <SimpleUsage/>
+        <Props/>
       </div>
     </div>
   )
