@@ -2,10 +2,10 @@ import React from "react";
 import "./styles/SideMenu.css";
 
 const menuItems = [
-  { label: "Quick start", href: "/get-started#Quickstart" },
-  { label: "Installation", href: "/get-started#Installation" },
-  { label: "Simple Usage", href: "/get-started#SimpleUsage" },
-  { label: "Props", href: "/get-started#Props" },
+  { label: "Quick start", href: "#Quickstart" },
+  { label: "Installation", href: "#Installation" },
+  { label: "Simple Usage", href: "#SimpleUsage" },
+  { label: "Props", href: "#Props" },
 ];
 
 export default function SideMenu() {
