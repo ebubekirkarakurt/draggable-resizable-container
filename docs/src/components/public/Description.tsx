@@ -1,4 +1,5 @@
 import React from 'react'
+import "./styles/Description.css"
 
 type Props = {
   description: string;
@@ -6,17 +7,6 @@ type Props = {
 
 export default function Description({description}: Props) {
   return (
-    <div 
-     style={{
-        fontSize: "0.9rem",
-        display: "flex",
-        justifyContent:'start',
-        padding: "5px",
-        color:"white",
-        textAlign: "left",
-        marginBottom:"10px",
-        marginTop: "10px"
-    }}
-    >{description}</div>
+    <div className='description-text'>{description}</div>
   )
 }

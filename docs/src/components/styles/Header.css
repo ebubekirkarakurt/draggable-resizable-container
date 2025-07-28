@@ -5,3 +5,15 @@
   color: white;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+
+  #title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: white;
+    align-items: center;
+  }
+
+}

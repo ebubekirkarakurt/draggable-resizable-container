@@ -1,4 +1,5 @@
 import React from 'react'
+import "./styles/Title.css"
 
 type Props = {
   title: string;
@@ -6,15 +7,6 @@ type Props = {
 
 export default function Title({title}: Props) {
   return (
-    <div 
-     style={{
-        fontSize: "28px",
-        display: "flex",
-        justifyContent:'start',
-        padding: "5px",
-        fontWeight: "bold",
-        color:"white"
-    }}
-    >{title}</div>
+    <div className='title-text'>{title}</div>
   )
 }
