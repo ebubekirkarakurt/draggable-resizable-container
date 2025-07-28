@@ -22,16 +22,15 @@ export default function SideMenu() {
               <a href={item.href}>{item.label}</a>
             </li>
 
-            {/* Extra sub-items under Simple Usage */}
             {item.label === "Simple Usage" && (
               <>
                 <li className="menu-item sub-item">
                   <code className="icon">↳</code>
-                  <a href="/get-started#SimpleUsageReact">React</a>
+                  <a href="#SimpleUsageReact">React</a>
                 </li>
                 <li className="menu-item sub-item">
                   <code className="icon">↳</code>
-                  <a href="/get-started#SimpleUsageVanilla">Vanilla JS</a>
+                  <a href="#SimpleUsageVanilla">Vanilla JS</a>
                 </li>
               </>
             )}
