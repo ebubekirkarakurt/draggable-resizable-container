@@ -8,3 +8,23 @@ body{
   padding: 2rem;
   text-align: center;
 }
+
+.app-container {
+  display: flex;
+}
+
+.side-menu {
+  position: fixed;
+  top: 100;
+  width: 260px;
+  height: 100vh;
+  background-color: transparent;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.content {
+  margin-left: 260px; 
+  padding: 2rem;
+  flex: 1;
+}
