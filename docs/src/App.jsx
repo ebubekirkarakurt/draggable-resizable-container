@@ -11,7 +11,7 @@ function App() {
       <SideMenu />
       <div className="content">
         <Header />
-        <Installation code='npm i draggable-resizable-container' />
+        <Installation code='> npm i draggable-resizable-container' />
         <SimpleUsage/>
       </div>
     </div>

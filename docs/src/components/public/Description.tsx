@@ -8,11 +8,10 @@ export default function Description({description}: Props) {
   return (
     <div 
      style={{
-        fontSize: "13px",
+        fontSize: "0.9rem",
         display: "flex",
         justifyContent:'start',
         padding: "5px",
-        fontWeight: "semi-bold",
         color:"white",
         textAlign: "left",
         marginBottom:"10px",

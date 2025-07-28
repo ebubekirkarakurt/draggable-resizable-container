@@ -6,21 +6,3 @@
     font-family: monospace;
     overflow-x: auto;
 }
-
-.code-block{
-    background-color: #0f111b;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    padding: 5px;
-}
-
-#btn {
-    background-color: #444;
-    color: #fff;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
