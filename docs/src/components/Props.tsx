@@ -5,8 +5,8 @@ import './styles/Props.css';
 
 export default function Props() {
   return (
-    <div>
-      <Title title="Props" />
+    <div id="Props">
+      <Title title="🧱 Props" />
       <Description description="The DraggableResizableContainer component can be easily customized using the following props. You can provide dynamic data, add a custom alert sound, and define interactions for user clicks." />
       
       <div className="props-table-wrapper">

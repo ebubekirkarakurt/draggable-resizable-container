@@ -1,4 +1,4 @@
-#title{
+.title{
   font-size: 2.3rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -8,7 +8,7 @@
 
 @media (max-width: 768px) {
 
-  #title{
+  .title{
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;

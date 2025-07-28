@@ -12,14 +12,30 @@ export default function SideMenu() {
   return (
     <aside className="side-menu">
       <div className="side-menu-title">
-        <h4>------------------- Menu -------------------</h4>
+        <h4>----------- Menu -----------</h4>
       </div>
       <ul className="side-menu-list">
         {menuItems.map((item) => (
-          <li key={item.href} className="menu-item">
-            <code aria-hidden="true" className="icon">{'</>'}</code>
-            <a href={item.href}>{item.label}</a>
-          </li>
+          <React.Fragment key={item.href}>
+            <li className="menu-item">
+              <code aria-hidden="true" className="icon">{'</>'}</code>
+              <a href={item.href}>{item.label}</a>
+            </li>
+
+            {/* Extra sub-items under Simple Usage */}
+            {item.label === "Simple Usage" && (
+              <>
+                <li className="menu-item sub-item">
+                  <code className="icon">↳</code>
+                  <a href="/get-started#SimpleUsageReact">React</a>
+                </li>
+                <li className="menu-item sub-item">
+                  <code className="icon">↳</code>
+                  <a href="/get-started#SimpleUsageVanilla">Vanilla JS</a>
+                </li>
+              </>
+            )}
+          </React.Fragment>
         ))}
       </ul>
     </aside>

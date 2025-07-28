@@ -19,8 +19,8 @@ export default function Installation({ code, language = "bash" }: Props) {
   };
 
   return (
-    <div className="main">
-      <Title title="Installation" /> 
+    <div className="main" id="Installation">
+      <Title title="📦 Installation" /> 
       <Description  description="Installing Draggable Resizable Container only takes a single command and you're ready to roll." />
       <CodeBlock  code={code} />
     </div>

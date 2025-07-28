@@ -6,12 +6,18 @@ import "./styles/SimpleUsage.css"
 
 export default function SimpleUsage() {
   return (
-    <div className="main">
-        <Title title="Simple Usage" />
+    <div className="main" id="SimpleUsage"> 
+        <Title title="🔧 Simple Usage" />
         <Description  description="The following code excerpt demonstrates a basic usage example:" />
-        <Description  description="> React:"/>
+         <div id="SimpleUsageReact" >
+            <Description  description="> React:"/>
+        </div>
+        
         <CodeBlock code={reactCode} /> 
-        <Description  description="> Vanilla.Js:"/>
+        <div id="SimpleUsageVanilla" >
+            <Description  description="> Vanilla.Js:" />
+        </div>
+
         <CodeBlock code={vanillaCode} /> 
     </div>
   )
