@@ -28,7 +28,7 @@
     "url": "https://github.com/ebubekirkarakurt/resizable-container"
   },
   "license": "MIT",
-  "homepage": "https://github.com/ebubekirkarakurt/resizable-container#readme",
+  "homepage": "https://draggable-resizable-container.vercel.app",
   "dependencies": {
     "@types/react": "^19.1.8",
     "react": "^19.1.0"
