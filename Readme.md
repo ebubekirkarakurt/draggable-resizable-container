@@ -133,7 +133,7 @@ draggable-resizable-container/
 - [x] Sound integration on animation/alarm
 - [x] Box click handler
 - [x] CDN support
-- [x] Live demo page (coming soon)
+- [x] Live demo page
 
 ---
 
