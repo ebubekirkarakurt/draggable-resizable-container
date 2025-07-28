@@ -24,7 +24,8 @@ body{
 }
 
 .content {
-  margin-left: 260px; 
+  margin-left: 20rem; 
   padding: 2rem;
   flex: 1;
+  max-width:  70%;
 }
