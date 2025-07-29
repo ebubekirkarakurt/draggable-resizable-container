@@ -39,9 +39,14 @@
     "rimraf": "^6.0.1"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:cdn",
+    "dev": "vite --config docs/vite.config.js",
+    "build:docs": "vite build --config docs/vite.config.js",
+    "preview": "vite preview --config docs/vite.config.js",
+
     "clean": "rimraf dist",
-    "build:cdn": "mkdir dist && copyfiles -f public/draggable-resizable-component.* dist"
+    "build:cdn": "mkdir dist && copyfiles -f public/draggable-resizable-component.* dist",
+    "build": "npm run clean && npm run build:cdn"
   }
+
 
 }
