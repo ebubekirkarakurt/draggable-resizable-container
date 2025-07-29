@@ -31,22 +31,23 @@
   "homepage": "https://draggable-resizable-container.vercel.app",
   "dependencies": {
     "@types/react": "^19.1.8",
-    "react": "^19.1.0"
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-syntax-highlighter": "^15.6.1"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",
+    "@vitejs/plugin-react": "^4.7.0",
     "copyfiles": "^2.4.1",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "vite": "^7.0.6"
   },
   "scripts": {
     "dev": "vite --config docs/vite.config.js",
     "build:docs": "vite build --config docs/vite.config.js",
     "preview": "vite preview --config docs/vite.config.js",
-
     "clean": "rimraf dist",
     "build:cdn": "mkdir dist && copyfiles -f public/draggable-resizable-component.* dist",
     "build": "npm run clean && npm run build:cdn"
   }
-
-
 }
