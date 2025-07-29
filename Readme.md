@@ -21,7 +21,7 @@ A quick preview of the component in action:
 - 🔔 Optional sound alert integration
 - 🎯 Custom click handling via `onBoxClick`
 - 📦 Published on NPM — easy to install
-- 🌐 CDN version coming soon...
+- 🌐 CDN version
 
 ---
 
@@ -134,14 +134,24 @@ draggable-resizable-container/
 
 ---
 
-## ✅ TODO
+## 🧑‍💻 Local Development
 
-- [x] Horizontal and vertical resizing
-- [x] Responsive layout
-- [x] Sound integration on animation/alarm
-- [x] Box click handler
-- [x] CDN support
-- [x] Live demo page
+If you'd like to contribute or test the documentation site locally:
+
+### How to Setup?
+
+```bash
+git clone https://github.com/ebubekirkarakurt/draggable-resizable-container.git
+```
+```bash
+cd draggable-resizable-container
+```
+```bash
+npm install
+```
+```bash
+npm run dev
+```
 
 ---
 
