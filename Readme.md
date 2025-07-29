@@ -5,6 +5,14 @@ Provides interactive UI for dragging, resizing, and dynamic data display — ide
 
 ---
 
+## 🎬 Live Preview
+
+A quick preview of the component in action:
+
+![Draggable Resizable Container Demo](./docs/public/demo.gif)
+
+---
+
 ## 🚀 Features
 
 - ⚛️ Built with React
