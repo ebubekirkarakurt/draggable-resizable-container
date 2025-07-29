@@ -10,7 +10,7 @@ export default function Demo() {
       <Title title="🎬 Live Preview" /> 
       <Description  description="A quick preview of the component in action:" />
        <img
-            src="/public/demo.gif"
+            src="/demo.gif"
             alt="Draggable Resizable Container Demo"
             style={{
               maxWidth: '100%',
