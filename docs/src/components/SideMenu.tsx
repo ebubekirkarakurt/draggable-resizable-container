@@ -3,6 +3,7 @@ import "./styles/SideMenu.css";
 
 const menuItems = [
   { label: "Quick start", href: "#Quickstart" },
+  { label: "Live Preview", href: "#LivePreview" },
   { label: "Installation", href: "#Installation" },
   { label: "Simple Usage", href: "#SimpleUsage" },
   { label: "Props", href: "#Props" },

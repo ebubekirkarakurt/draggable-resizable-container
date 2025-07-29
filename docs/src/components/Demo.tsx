@@ -6,7 +6,7 @@ import "./styles/Installation.css"
 export default function Demo() {
   
   return (
-    <div className="main" id="Demo">
+    <div className="main" id="LivePreview">
       <Title title="🎬 Live Preview" /> 
       <Description  description="A quick preview of the component in action:" />
        <img
