@@ -1,6 +1,6 @@
 {
   "name": "draggable-resizable-container",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A resizable and draggable container component for React, frameworks, or native JavaScript",
   "repository": {
     "type": "git",
