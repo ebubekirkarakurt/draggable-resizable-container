@@ -90,7 +90,11 @@ class DraggableResizableContainer {
     this.items.forEach((item) => {
       const box = document.createElement("div");
       box.className = "small-box";
-      box.textContent = item.title;
+      const titleSpan = document.createElement("span");
+      titleSpan.textContent = item.title;
+      titleSpan.id = `list-title`; // title'a id veriyoruz
+
+      box.appendChild(titleSpan);
 
       box.addEventListener("click", () => {
         if (this.onBoxClick) this.onBoxClick(item.id);

@@ -114,7 +114,9 @@ const DraggableResizableContainer: React.FC<DraggableResizableAlarmContainerProp
           className="small-box"
           onClick={() => onBoxClick?.(item.id)}
         >
-          {item.title}
+          <span id="list-title" >
+            {item.title}
+          </span>
           <div
             className="top-right-box"
             style={{

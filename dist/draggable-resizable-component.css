@@ -15,7 +15,6 @@
   position: absolute;
   cursor: move;
   user-select: none;
-  
 }
 
 .resizable-container.dragging {
@@ -46,20 +45,40 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s;
+  position: relative;
+  padding: 10px;
+  text-align: center;
 }
 
 .small-box:hover {
   background-color: #495057;
 }
 
+#list-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  white-space: normal;
+  max-height: 3em;
+  line-height: 1.5em;
+
+  text-align: center;
+  padding: 0 10px;
+  width: 100%;
+}
+
 .top-right-box {
-  border-radius: 100%;
-  padding: 4%;
-  display: flex;
-  position: relative;  
-  bottom: 34%;           
-  left: 26%;         
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 15px;
+  height: 15px;
   background-color: gray;
+  border-radius: 50%;
+  z-index: 10;
 }
 
 .blink {

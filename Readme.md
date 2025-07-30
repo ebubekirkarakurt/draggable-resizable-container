@@ -134,7 +134,7 @@ draggable-resizable-container/
 
 ---
 
-## 🧑‍💻 Local Development
+##  Local Development
 
 If you'd like to contribute or test the documentation site locally:
 
