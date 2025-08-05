@@ -73,59 +73,81 @@ class DraggableResizableContainer {
   async fetchAndUpdate() {
     try {
       let result = typeof this.data === "function" ? await this.data() : this.data;
-      if (!Array.isArray(result)) return;
+      if (Array.isArray(result)) {
+        this.items = result[0]?.containers;
+      } else if (result?.containers) {
+        this.items = result.containers;
+      }
 
-      this.items = result;
+      //console.log("Result: ", result.containers)
+      this.items = result.containers;
       this.updateUI();
     } catch (err) {
       console.error("Veri alma hatası:", err);
     }
   }
 
-  updateUI() {
+ updateUI() {
     this.container.innerHTML = "";
-
-    let alarmActive = false;
 
     this.items.forEach((item) => {
       const box = document.createElement("div");
       box.className = "small-box";
+
+      const titleWrapper = document.createElement("div");
+      titleWrapper.className = "title-wrapper";
+
       const titleSpan = document.createElement("span");
-      titleSpan.textContent = item.title;
-      titleSpan.id = `list-title`; // title'a id veriyoruz
+      titleSpan.textContent = item.label;
+      titleSpan.id = "list-title";
 
-      box.appendChild(titleSpan);
+      titleWrapper.appendChild(titleSpan);
+      box.appendChild(titleWrapper);
 
-      box.addEventListener("click", () => {
-        if (this.onBoxClick) this.onBoxClick(item.id);
+      // Butonların kapsayıcısı
+      const btnWrapper = document.createElement("div");
+      btnWrapper.className = "multiStageBtn-container";
+
+      item.buttons.forEach((btn) => {
+        const multiStageBtn = document.createElement("div");
+        multiStageBtn.className = "multiStageBtn";
+        multiStageBtn.style.flex = `${btn.width || 50}%`;
+
+        let currentStage = 0;
+        const stage = btn.stages[currentStage];
+        multiStageBtn.style.backgroundColor = stage.color;
+        if (stage.blinked) multiStageBtn.classList.add("blink");
+
+        const btnTitle = document.createElement("span");
+        btnTitle.textContent = btn.label;
+        btnTitle.id = "multiStageBtn-title";
+        multiStageBtn.appendChild(btnTitle);
+
+        multiStageBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentStage = (currentStage + 1) % btn.stages.length;
+          const newStage = btn.stages[currentStage];
+          multiStageBtn.style.backgroundColor = newStage.color;
+          multiStageBtn.classList.toggle("blink", !!newStage.blinked);
+
+          if (this.onButtonStageChanged) {
+            this.onButtonStageChanged({
+              containerId: item.id,
+              buttonId: btn.id,
+              stageIndex: currentStage,
+            });
+          }
+        });
+
+        btnWrapper.appendChild(multiStageBtn);
       });
 
-      const indicator = document.createElement("div");
-      indicator.className = "top-right-box";
-      if (item.alarmStatus === 1) {
-        indicator.style.backgroundColor = "green";
-        indicator.classList.add("blink");
-        alarmActive = true;
-      } else {
-        indicator.style.backgroundColor = "gray";
-        indicator.classList.remove("blink");
-      }
-
-      box.appendChild(indicator);
+      box.appendChild(btnWrapper);
       this.container.appendChild(box);
     });
-
-    // Alarm sesi kontrolü
-    if (alarmActive && !this.alarmInterval) {
-      this.alarmInterval = setInterval(() => {
-        this.audio.currentTime = 0;
-        this.audio.play().catch(() => {});
-      }, 1000);
-    } else if (!alarmActive && this.alarmInterval) {
-      clearInterval(this.alarmInterval);
-      this.alarmInterval = null;
-    }
   }
+
+
 }
 
 window.DraggableResizableContainer = DraggableResizableContainer;
