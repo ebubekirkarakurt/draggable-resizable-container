@@ -118,11 +118,14 @@
 }
 
 .blink {
-  animation: blink-animation 1s steps(2, start) infinite;
+  animation: smooth-blink 1.5s ease-in-out infinite;
 }
 
-@keyframes blink-animation {
+@keyframes smooth-blink {
+  0%, 100% {
+    opacity: 1;
+  }
   50% {
-    opacity: 0;
+    opacity: 0.5;
   }
 }
