@@ -2,20 +2,17 @@ class DraggableResizableContainer {
   constructor({
     containerId = "alarmContainer",
     data,
-    soundSrc = "/sound.mp3",
     pollingInterval = 1000,
     onBoxClick,
     containerClassName = "resizable-container"
   }) {
     this.container = document.getElementById(containerId);
     this.data = data;
-    this.soundSrc = soundSrc;
     this.pollingInterval = pollingInterval;
     this.onBoxClick = onBoxClick;
     this.containerClassName = containerClassName;
 
     this.items = [];
-    this.audio = null;
     this.interval = null;
     this.drag = { active: false, offsetX: 0, offsetY: 0 };
 
@@ -29,12 +26,6 @@ class DraggableResizableContainer {
 
   init() {
     this.container.classList.add(this.containerClassName);
-
-    this.audio = document.createElement("audio");
-    this.audio.src = this.soundSrc;
-    this.audio.id = "alarmSound";
-    this.audio.preload = "auto";
-    document.body.appendChild(this.audio);
 
     this.container.addEventListener("mousedown", (e) => {
       const isResizeHandle =
@@ -79,7 +70,6 @@ class DraggableResizableContainer {
         this.items = result.containers;
       }
 
-      //console.log("Result: ", result.containers)
       this.items = result.containers;
       this.updateUI();
     } catch (err) {
@@ -89,14 +79,12 @@ class DraggableResizableContainer {
 
   updateUI() {
     this.container.innerHTML = "";
-
-    this.buttonMap = {}; // Butonları id ile eşle (switchToNextStage için)
+    this.buttonMap = {};
 
     this.items.forEach((item) => {
       const box = document.createElement("div");
       box.className = "small-box";
 
-      // Başlık
       const titleWrapper = document.createElement("div");
       titleWrapper.className = "title-wrapper";
 
@@ -107,7 +95,6 @@ class DraggableResizableContainer {
       titleWrapper.appendChild(titleSpan);
       box.appendChild(titleWrapper);
 
-      // Buton kapsayıcısı
       const btnWrapper = document.createElement("div");
       btnWrapper.className = "multiStageBtn-container";
 
@@ -117,17 +104,14 @@ class DraggableResizableContainer {
         multiStageBtn.style.flex = `${btn.width || 50}%`;
         multiStageBtn.setAttribute("data-button-id", btn.id);
 
-        // currentStage başlat
         btn.currentStage = btn.currentStage ?? 0;
 
-        // Stage DOM haritasına ekle
         this.buttonMap[btn.id] = {
           dom: multiStageBtn,
           stages: btn.stages,
           currentStage: btn.currentStage,
         };
 
-        // Stage uygula fonksiyonu
         const applyStageByIndex = (btn, domElement) => {
           const stage = btn.stages.find(
             (s, i) => s.stageIndex === btn.currentStage || i === btn.currentStage
@@ -138,28 +122,24 @@ class DraggableResizableContainer {
 
           if (stage.blinked) {
             domElement.classList.remove("blink");
-            void domElement.offsetWidth; // reflow
+            void domElement.offsetWidth;
             domElement.classList.add("blink");
           } else {
             domElement.classList.remove("blink");
           }
         };
 
-        // Başlangıçta stage uygula
         applyStageByIndex(btn, multiStageBtn);
 
-        // Buton başlığı
         const btnTitle = document.createElement("span");
         btnTitle.textContent = btn.label;
         btnTitle.id = "multiStageBtn-title";
         multiStageBtn.appendChild(btnTitle);
 
-        // Tıklama event
         multiStageBtn.addEventListener("click", (e) => {
           e.stopPropagation();
 
           btn.currentStage = (btn.currentStage + 1) % btn.stages.length;
-
           applyStageByIndex(btn, multiStageBtn);
 
           if (this.onButtonStageChanged) {
@@ -178,9 +158,6 @@ class DraggableResizableContainer {
       this.container.appendChild(box);
     });
   }
-
-
-
 }
 
 window.DraggableResizableContainer = DraggableResizableContainer;
