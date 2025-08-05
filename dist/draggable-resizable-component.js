@@ -87,13 +87,16 @@ class DraggableResizableContainer {
     }
   }
 
- updateUI() {
+  updateUI() {
     this.container.innerHTML = "";
+
+    this.buttonMap = {}; // Butonları id ile eşle (switchToNextStage için)
 
     this.items.forEach((item) => {
       const box = document.createElement("div");
       box.className = "small-box";
 
+      // Başlık
       const titleWrapper = document.createElement("div");
       titleWrapper.className = "title-wrapper";
 
@@ -104,7 +107,7 @@ class DraggableResizableContainer {
       titleWrapper.appendChild(titleSpan);
       box.appendChild(titleWrapper);
 
-      // Butonların kapsayıcısı
+      // Buton kapsayıcısı
       const btnWrapper = document.createElement("div");
       btnWrapper.className = "multiStageBtn-container";
 
@@ -112,29 +115,58 @@ class DraggableResizableContainer {
         const multiStageBtn = document.createElement("div");
         multiStageBtn.className = "multiStageBtn";
         multiStageBtn.style.flex = `${btn.width || 50}%`;
+        multiStageBtn.setAttribute("data-button-id", btn.id);
 
-        let currentStage = 0;
-        const stage = btn.stages[currentStage];
-        multiStageBtn.style.backgroundColor = stage.color;
-        if (stage.blinked) multiStageBtn.classList.add("blink");
+        // currentStage başlat
+        btn.currentStage = btn.currentStage ?? 0;
 
+        // Stage DOM haritasına ekle
+        this.buttonMap[btn.id] = {
+          dom: multiStageBtn,
+          stages: btn.stages,
+          currentStage: btn.currentStage,
+        };
+
+        // Stage uygula fonksiyonu
+        const applyStageByIndex = (btn, domElement) => {
+          const stage = btn.stages.find(
+            (s, i) => s.stageIndex === btn.currentStage || i === btn.currentStage
+          );
+          if (!stage) return;
+
+          domElement.style.backgroundColor = stage.color;
+
+          if (stage.blinked) {
+            domElement.classList.remove("blink");
+            void domElement.offsetWidth; // reflow
+            domElement.classList.add("blink");
+          } else {
+            domElement.classList.remove("blink");
+          }
+        };
+
+        // Başlangıçta stage uygula
+        applyStageByIndex(btn, multiStageBtn);
+
+        // Buton başlığı
         const btnTitle = document.createElement("span");
         btnTitle.textContent = btn.label;
         btnTitle.id = "multiStageBtn-title";
         multiStageBtn.appendChild(btnTitle);
 
+        // Tıklama event
         multiStageBtn.addEventListener("click", (e) => {
           e.stopPropagation();
-          currentStage = (currentStage + 1) % btn.stages.length;
-          const newStage = btn.stages[currentStage];
-          multiStageBtn.style.backgroundColor = newStage.color;
-          multiStageBtn.classList.toggle("blink", !!newStage.blinked);
+
+          btn.currentStage = (btn.currentStage + 1) % btn.stages.length;
+
+          applyStageByIndex(btn, multiStageBtn);
 
           if (this.onButtonStageChanged) {
             this.onButtonStageChanged({
               containerId: item.id,
               buttonId: btn.id,
-              stageIndex: currentStage,
+              stageIndex: btn.currentStage,
             });
           }
         });
@@ -146,6 +178,7 @@ class DraggableResizableContainer {
       this.container.appendChild(box);
     });
   }
+
 
 
 }
