@@ -5,6 +5,7 @@ const menuItems = [
   { label: "Quick start", href: "#Quickstart" },
   { label: "Live Preview", href: "#LivePreview" },
   { label: "Installation", href: "#Installation" },
+  { label: "Sample Data Format", href: "#DataFormat" },
   { label: "Simple Usage", href: "#SimpleUsage" },
   { label: "Props", href: "#Props" },
 ];

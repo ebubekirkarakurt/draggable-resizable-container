@@ -6,6 +6,8 @@ import SideMenu from './components/SideMenu'
 import SimpleUsage from './components/SimpleUsage'
 import Props from './components/Props'
 import Demo from './components/Demo'
+import DataFormat from './components/DataFormat'
+import { data } from './components/data'
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Header />
         <Demo/>
         <Installation code='> npm i draggable-resizable-container' />
+        <DataFormat code={data} />
         <SimpleUsage/>
         <Props/>
       </div>

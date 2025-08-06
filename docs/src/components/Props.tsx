@@ -4,11 +4,11 @@ import Description from './public/Description';
 import './styles/Props.css'; 
 
 export default function Props() {
-  return (
-    <div id="Props" style={{padding:"1rem"}} >
+  return  (
+    <div id="Props" style={{ padding: "1rem" }}>
       <Title title="🧱 Props" />
-      <Description description="The DraggableResizableContainer component can be easily customized using the following props. You can provide dynamic data, add a custom alert sound, and define interactions for user clicks." />
-      
+      <Description description="The DraggableResizableContainer component can be easily customized using the following props. You can provide dynamic data, configure refresh intervals, and define interactions." />
+
       <div className="props-table-wrapper">
         <table className="props-table">
           <thead>
@@ -21,23 +21,26 @@ export default function Props() {
           <tbody>
             <tr>
               <td><code>data</code></td>
-              <td><code>Array&lt;{"{ id, title, alarmStatus }"}&gt;</code></td>
-              <td>Data to render inside each box</td>
+              <td><code>Array&lt;{"{ id, label, buttons: Button[] }"}&gt;</code></td>
+              <td>Contains data for each draggable container box</td>
             </tr>
             <tr>
-              <td><code>soundSrc</code></td>
-              <td><code>string</code></td>
-              <td>Path to the alert sound (optional)</td>
+              <td><code>pollingInterval</code></td>
+              <td><code>number</code></td>
+              <td>Optional. Interval for refetching data (in milliseconds). Default: <code>1000</code></td>
             </tr>
             <tr>
-              <td><code>onBoxClick</code></td>
-              <td><code>(id: number &#124; string) =&gt; void</code></td>
-              <td>Callback when a box is clicked</td>
+              <td><code>onButtonStageChanged</code></td>
+              <td>
+                <code>
+                  ({'{'} containerId: string, buttonId: string, stageIndex: number {'}'}) =&gt; void
+                </code>
+              </td>
+              <td>Triggered when any button is clicked and its stage is updated</td>
             </tr>
           </tbody>
         </table>
       </div>
-      
     </div>
   );
 }

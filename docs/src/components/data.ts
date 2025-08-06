@@ -1,26 +1,49 @@
+export const data = `const data = [
+  {
+    id: "container-1",
+    label: "Engine",
+    buttons: [
+      {
+        id: "btn-1-1",
+        label: "Overheat Alert",
+        width: 40,
+        currentStage: 1,
+        stages: [
+          { color: "green" },
+          { color: "red", blinked: true },
+          { color: "yellow", blinked: true }
+        ]
+      },
+      {
+        id: "btn-1-2",
+        label: "Maintenance Needed",
+        width: 60,
+        currentStage: 0,
+        stages: [
+          { color: "green" },
+          { color: "red", blinked: true },
+          { color: "yellow", blinked: true }
+        ]
+      }
+    ]
+  },
+  ...
+];`
+
 export const reactCode = `import DraggableResizableContainer from 'draggable-resizable-container';
 
 function App() {
   return (
-    <>
-      <audio id="alarmSound" src="/sound.mp3" preload="auto"></audio>
-
-      <DraggableResizableContainer
-        data={[
-          { id: 1, title: "Sensor 1", alarmStatus: 1 },
-          { id: 2, title: "Sensor 2", alarmStatus: 0 },
-          { id: 3, title: "Sensor 3", alarmStatus: 1 },
-          { id: 4, title: "Sensor 4", alarmStatus: 0 },
-          { id: 5, title: "Sensor 5", alarmStatus: 1 }
-        ]}
-        soundSrc="/sound.mp3"
-        onBoxClick={(id: number | string) => console.log("Clicked ID:", id)}
-      />
-    </>
+    <DraggableResizableContainer
+      data={data}
+      onButtonStageChanged={({ containerId, buttonId, stageIndex }) =>
+        console.log("Button stage changed: \${containerId} > \${buttonId} > \${stageIndex}")
+      }
+    />
   );
 }
 
-export default App;`
+export default App;`;
 
 export const vanillaCode = `<link
   rel="stylesheet"
