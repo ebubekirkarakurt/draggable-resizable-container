@@ -4,7 +4,6 @@ import '../styles/styles.css';
 
 const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = ({
   data,
-  pollingInterval = 1000,
   containerClassName,
   onButtonStageChanged,
 }) => {
@@ -70,7 +69,7 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, pollingInterval);
+    const interval = setInterval(fetchData, 1000);
     return () => clearInterval(interval);
   }, [data]);
 
@@ -78,7 +77,20 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
     btn: ContainerItem["buttons"][number],
     containerId: string | number
   ) => {
-    btn.currentStage = (btn.currentStage + 1) % btn.stages.length;
+     
+      btn.currentStage = (btn.currentStage + 1) % btn.stages.length;
+
+      setItems((prevItems) =>
+        prevItems.map((container) => {
+          if (container.id !== containerId) return container;
+          return {
+            ...container,
+            buttons: container.buttons.map((b) =>
+              b.id === btn.id ? { ...b, currentStage: btn.currentStage } : b
+            ),
+          };
+        })
+      );
 
     if (onButtonStageChanged) {
       onButtonStageChanged({
@@ -99,27 +111,29 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
           key={item.id}
           className="small-box"
         >
-          <span id="list-title">{item.title}</span>
-          <div className="multiStageBtn-container">
-            {item.buttons.map((btn) => {
-              const stage = btn.stages[btn.currentStage];
-              return (
-                <div
-                  key={btn.id}
-                  className={`multiStageBtn ${stage.blinked ? "blink" : ""}`}
-                  style={{
-                    flex: `${btn.width || 50}%`,
-                    backgroundColor: stage.color,
-                  }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleStageClick(btn, item.id);
-                  }}
-                >
-                  <span id="multiStageBtn-title">{btn.label}</span>
-                </div>
-              );
-            })}
+          <div className="title-wrapper">
+            <span id="list-title">{item.label}</span>
+            <div className="multiStageBtn-container">
+              {item.buttons.map((btn) => {
+                const stage = btn.stages[btn.currentStage];
+                return (
+                  <div
+                    key={btn.id}
+                    className={`multiStageBtn ${stage.blinked ? "blink" : ""}`}
+                    style={{
+                      flex: `${btn.width || 50}%`,
+                      backgroundColor: stage.color,
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleStageClick(btn, item.id);
+                    }}
+                  >
+                    <span id="multiStageBtn-title">{btn.label}</span>
+                  </div>
+                );
+              })}
+          </div>
           </div>
         </div>
       ))}

@@ -16,7 +16,6 @@ export interface ContainerItem {
 
 export interface DraggableResizableContainerProps {
   data: ContainerItem[] | (() => Promise<ContainerItem[]>);
-  pollingInterval?: number;
   containerClassName?: string;
   onButtonStageChanged?: (event: {
     containerId: string | number;
