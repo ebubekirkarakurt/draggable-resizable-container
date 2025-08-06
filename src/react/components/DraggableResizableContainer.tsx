@@ -1,23 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { DraggableResizableAlarmContainerProps, AlarmItem } from "./DraggableResizableAlarmContainerProps";
+import { DraggableResizableContainerProps, ContainerItem } from "./DraggableResizableAlarmContainerProps";
 import '../styles/styles.css';
 
-const DraggableResizableContainer: React.FC<DraggableResizableAlarmContainerProps> = ({
+const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = ({
   data,
-  alarmAudioId = "alarmSound",
   pollingInterval = 1000,
   containerClassName,
-  onBoxClick,
-  soundSrc,
+  onButtonStageChanged,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [items, setItems] = useState<AlarmItem[]>([]);
-  const alarmSoundRef = useRef<HTMLAudioElement | null>(null);
-  const alarmIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [items, setItems] = useState<ContainerItem[]>([]);
   const isDragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
 
-  // Dragging setup
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -79,29 +74,20 @@ const DraggableResizableContainer: React.FC<DraggableResizableAlarmContainerProp
     return () => clearInterval(interval);
   }, [data]);
 
-  useEffect(() => {
-    if (!alarmSoundRef.current) {
-      const audio = document.createElement("audio");
-      audio.id = alarmAudioId;
-      if (soundSrc) audio.src = soundSrc;
-      document.body.appendChild(audio);
-      alarmSoundRef.current = audio;
-    }
+  const handleStageClick = (
+    btn: ContainerItem["buttons"][number],
+    containerId: string | number
+  ) => {
+    btn.currentStage = (btn.currentStage + 1) % btn.stages.length;
 
-    const anyAlarm = items.some((item) => item.alarmStatus === 1);
-
-    if (anyAlarm && !alarmIntervalRef.current) {
-      alarmIntervalRef.current = setInterval(() => {
-        if (alarmSoundRef.current) {
-          alarmSoundRef.current.currentTime = 0;
-          alarmSoundRef.current.play().catch(() => {});
-        }
-      }, 1000);
-    } else if (!anyAlarm && alarmIntervalRef.current) {
-      clearInterval(alarmIntervalRef.current);
-      alarmIntervalRef.current = null;
+    if (onButtonStageChanged) {
+      onButtonStageChanged({
+        containerId,
+        buttonId: btn.id,
+        stageIndex: btn.currentStage,
+      });
     }
-  }, [items, soundSrc]);
+  };
 
   return (
     <div
@@ -112,19 +98,29 @@ const DraggableResizableContainer: React.FC<DraggableResizableAlarmContainerProp
         <div
           key={item.id}
           className="small-box"
-          onClick={() => onBoxClick?.(item.id)}
         >
-          <span id="list-title" >
-            {item.title}
-          </span>
-          <div
-            className="top-right-box"
-            style={{
-              backgroundColor: item.alarmStatus === 1 ? "green" : "gray",
-              animation:
-                item.alarmStatus === 1 ? "blink-animation 1s infinite" : "none",
-            }}
-          />
+          <span id="list-title">{item.title}</span>
+          <div className="multiStageBtn-container">
+            {item.buttons.map((btn) => {
+              const stage = btn.stages[btn.currentStage];
+              return (
+                <div
+                  key={btn.id}
+                  className={`multiStageBtn ${stage.blinked ? "blink" : ""}`}
+                  style={{
+                    flex: `${btn.width || 50}%`,
+                    backgroundColor: stage.color,
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleStageClick(btn, item.id);
+                  }}
+                >
+                  <span id="multiStageBtn-title">{btn.label}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>
