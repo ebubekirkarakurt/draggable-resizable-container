@@ -18,16 +18,20 @@ export default function CodeBlock({ code, language = 'tsx' }: Props) {
 
   return (
     <div className="code-block">
-      <SyntaxHighlighter language={language} style={oneDark} wrapLongLines={true}	 
-        customStyle={{
+      <SyntaxHighlighter
+          language={language}
+          style={oneDark}
+          wrapLongLines={true}
+          customStyle={{
             background: "#282c34",
             borderRadius: "0.5rem",
-            padding: "1.25rem",
-            width: "100%",         
+            padding: window.innerWidth < 700 ? "0.5rem" : "1.25rem",
+            width: "94%",
             overflowX: "auto",
-        }}>
-        {code}
-      </SyntaxHighlighter>
+          }}
+        >
+          {code}
+        </SyntaxHighlighter>
     </div>
   );
 }
