@@ -37,28 +37,56 @@ npm install draggable-resizable-container
 
 # 🔧 Usage
 
+## 🔰 Sample Data Format
+
+Below is an example of the `data` prop passed to `<DraggableResizableContainer />`.
+
+```ts
+const data = [
+  {
+    id: "container-1",
+    label: "Engine",
+    buttons: [
+      {
+        id: "btn-1-1",
+        label: "Overheat Alert",
+        width: 40,
+        currentStage: 1,
+        stages: [
+          { color: "green" },
+          { color: "red", blinked: true },
+          { color: "yellow", blinked: true }
+        ]
+      },
+      {
+        id: "btn-1-2",
+        label: "Maintenance Needed",
+        width: 60,
+        currentStage: 0,
+        stages: [
+          { color: "green" },
+          { color: "red", blinked: true },
+          { color: "yellow", blinked: true }
+        ]
+      }
+    ]
+  },
+  ...
+];
+
+
 ## React
 
 ```tsx
 import DraggableResizableContainer from 'draggable-resizable-container';
 
-function App() {
-  return (
-    <>
-      <audio id="alarmSound" src="/sound.mp3" preload="auto"></audio>
-
-      <DraggableResizableContainer
-        data={[
-          { id: 1, title: "Sensor 1", alarmStatus: 1 },
-          { id: 2, title: "Sensor 2", alarmStatus: 0 },
-          { id: 3, title: "Sensor 3", alarmStatus: 1 },
-          { id: 4, title: "Sensor 4", alarmStatus: 0 },
-          { id: 5, title: "Sensor 5", alarmStatus: 1 }
-        ]}
-        soundSrc="/sound.mp3"
-        onBoxClick={(id: number | string) => console.log("Clicked ID:", id)}
-      />
-    </>
+return (
+    <DraggableResizableContainer
+      data={data}
+      onButtonStageChanged={({ containerId, buttonId, stageIndex }) =>
+        console.log(`Button stage changed: ${containerId} > ${buttonId} > ${stageIndex}`)
+      }
+    />
   );
 }
 
@@ -71,35 +99,29 @@ export default App;
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/draggable-resizable-container@latest/dist/draggable-resizable-component.css"
 />
-<audio id="alarmSound" src="/sound.mp3" preload="auto"></audio>
-<div id="alarmContainer"></div>
+<div id="resizableContainer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/draggable-resizable-container@latest/dist/draggable-resizable-component.js"></script>
 <script>
-  new DraggableResizableContainer({
-    containerId: "alarmContainer",
-    data: [
-      { id: 1, title: "Sensor 1", alarmStatus: 1 },
-      { id: 2, title: "Sensor 2", alarmStatus: 0 },
-      { id: 3, title: "Sensor 3", alarmStatus: 1 },
-      { id: 4, title: "Sensor 4", alarmStatus: 0 },
-      { id: 5, title: "Sensor 5", alarmStatus: 1 },
-    ],
-    soundSrc: "/sound.mp3",(or)"https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
-    onBoxClick: (id) => console.log("Clicked box ID:", id),
-  });
-</script>
+    const comp = new DraggableResizableContainer({
+      containerId: "resizableContainer",
+      data: {data},
+      onButtonStageChanged: (e) => {
+        comp.switchToNextStage(e.buttonId);
+      }
+    });
+  </script>
 ```
 
 ---
 
 ## 🧱 Props
 
-| Prop         | Type                 | Description                                      |
-|--------------|----------------------|--------------------------------------------------|
-| `data`       | `Array<{ id, title, alarmStatus }>` | Data to render inside each box                  |
-| `soundSrc`   | `string`             | Path to the alert sound (optional)              |
-| `onBoxClick` | `(id: number \| string) => void` | Callback when a box is clicked             |
+| Prop                   | Type                                              | Description                                                              |
+| ---------------------- | ------------------------------------------------- | ------------------------------------------------------------------------ |
+| `data`                 | `Array<{ id, label, buttons: Button[] }>`         | Contains data for each draggable container box                           |
+| `pollingInterval`      | `number`                                          | Optional. Interval for refetching data (in milliseconds). Default: `1000` |                    |
+| `onButtonStageChanged` | `({ containerId, buttonId, stageIndex }) => void` | Triggered when any button is clicked and its stage is updated           |
 
 ---
 
