@@ -107,38 +107,36 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
       className={containerClassName || "resizable-container"}
     >
       {items.map((item) => (
-        <div
-          key={item.id}
-          className="small-box"
-        >
+        <div key={item.id} className="small-box">
           <div className="title-wrapper">
             <span id="list-title">{item.label}</span>
-            <div className="multiStageBtn-container">
-              {item.buttons.map((btn) => {
-                const stage = btn.stages[btn.currentStage];
-                return (
-                  <div
-                    key={btn.id}
-                    className={`multiStageBtn ${stage.blinked ? "blink" : ""}`}
-                    style={{
-                      flex: `${btn.width || 50}%`,
-                      backgroundColor: stage.color,
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleStageClick(btn, item.id);
-                    }}
-                  >
-                    <span id="multiStageBtn-title">{btn.label}</span>
-                  </div>
-                );
-              })}
           </div>
+          <div className="multiStageBtn-container">
+            {item.buttons.map((btn) => {
+              const stage = btn.stages[btn.currentStage];
+              return (
+                <div
+                  key={btn.id}
+                  className={`multiStageBtn ${stage.blinked ? "blink" : ""}`}
+                  style={{
+                    flex: `${btn.width || 50}%`,
+                    backgroundColor: stage.color,
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleStageClick(btn, item.id);
+                  }}
+                >
+                  <span id="multiStageBtn-title">{btn.label}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       ))}
     </div>
   );
+
 };
 
 export default DraggableResizableContainer;
