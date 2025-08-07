@@ -76,32 +76,34 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
     return () => clearInterval(interval);
   }, [data]);
 
-  const handleStageClick = (
-    btn: ContainerItem["buttons"][number],
-    containerId: string | number
-  ) => {
-    btn.currentStage = (btn.currentStage + 1) % btn.stages.length;
+  const handleStageClick = (btn: ContainerItem["buttons"][number], containerId: string | number) => {
+      setItems((prevItems) =>
+        prevItems.map((container) => {
+          if (container.id !== containerId) return container;
 
-    setItems((prevItems) =>
-      prevItems.map((container) => {
-        if (container.id !== containerId) return container;
-        return {
-          ...container,
-          buttons: container.buttons.map((b) =>
-            b.id === btn.id ? { ...b, currentStage: btn.currentStage } : b
-          )
-        };
-      })
-    );
+          return {
+            ...container,
+            buttons: container.buttons.map((b) =>
+              b.id === btn.id
+                ? {
+                    ...b,
+                    currentStage: (b.currentStage + 1) % b.stages.length
+                  }
+                : b
+            )
+          };
+        })
+      );
 
-    if (onButtonStageChanged) {
-      onButtonStageChanged({
-        containerId,
-        buttonId: btn.id,
-        stageIndex: btn.currentStage
-      });
-    }
-  };
+      if (onButtonStageChanged) {
+        onButtonStageChanged({
+          containerId,
+          buttonId: btn.id,
+          stageIndex: (btn.currentStage + 1) % btn.stages.length
+        });
+      }
+    };
+
 
   return (
     <div
@@ -128,6 +130,7 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
                   <div
                     key={btn.id}
                     className={`multiStageBtn ${stage.blinked ? "blink" : ""}`}
+                    style={{ backgroundColor: stage.color, flexBasis: `${btn.width}%` }} 
                     onClick={(e) => {
                       e.stopPropagation();
                       if (!isClickable) return;
