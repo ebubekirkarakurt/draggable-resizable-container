@@ -77,33 +77,37 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
   }, [data]);
 
   const handleStageClick = (btn: ContainerItem["buttons"][number], containerId: string | number) => {
-      setItems((prevItems) => {
-        return prevItems.map((container) => {
+      setItems((prevItems) =>
+        prevItems.map((container) => {
           if (container.id !== containerId) return container;
+
+          const updatedButtons = container.buttons.map((b) => {
+            if (b.id !== btn.id) return b;
+
+            const nextStage = (b.currentStage + 1) % b.stages.length;
+
+            if (onButtonStageChanged) {
+              onButtonStageChanged({
+                containerId,
+                buttonId: b.id,
+                stageIndex: nextStage
+              });
+            }
+
+            return {
+              ...b,
+              currentStage: nextStage
+            };
+          });
 
           return {
             ...container,
-            buttons: container.buttons.map((b) => {
-              if (b.id !== btn.id) return b;
-              const newStage = (b.currentStage + 1) % b.stages.length;
-
-              if (onButtonStageChanged) {
-                onButtonStageChanged({
-                  containerId,
-                  buttonId: b.id,
-                  stageIndex: newStage
-                });
-              }
-
-              return {
-                ...b,
-                currentStage: newStage
-              };
-            })
+            buttons: updatedButtons
           };
-        });
-      });
+        })
+      );
     };
+
 
 
 
