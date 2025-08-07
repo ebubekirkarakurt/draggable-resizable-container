@@ -135,15 +135,17 @@
 
 @media screen and (max-width: 1024px) {
   .resizable-container {
-    max-width: auto;
-    min-width: auto;
-    max-height: max-content;
-    min-height: min-content;
-    padding: 20px;
-    gap: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px; /* istersen sınırla */
+  height: auto;
+  margin: 0 auto; /* ortala */
+}
+
+
 
   .small-box {
     width: 100%;
@@ -176,8 +178,8 @@
 @media screen and (max-width: 600px) {
  .resizable-container {
     width: auto;
-    max-height: 80%;
-    min-height: 280px;
+    height: 500px;
+    max-width: 400px;
     padding: 20px;
     overflow-y: scroll;
   }
