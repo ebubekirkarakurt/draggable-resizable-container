@@ -4,6 +4,6 @@ import './styles/styles.css';
 export { DraggableResizableContainer };
 export default DraggableResizableContainer;
 export type {
-  DraggableResizableAlarmContainerProps,
-  AlarmItem,
+  DraggableResizableContainerProps,
+  ContainerItem
 } from "./components/DraggableResizableAlarmContainerProps";

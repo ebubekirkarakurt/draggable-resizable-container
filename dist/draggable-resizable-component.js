@@ -1,6 +1,6 @@
 class DraggableResizableContainer {
   constructor({
-    containerId = "alarmContainer",
+    containerId = "resizableContainer",
     data,
     pollingInterval = 1000,
     onBoxClick,
@@ -92,6 +92,15 @@ class DraggableResizableContainer {
       titleSpan.textContent = item.label;
       titleSpan.id = "list-title";
 
+      if (item.labelStyle && typeof item.labelStyle === "object") {
+        Object.assign(titleWrapper.style, item.labelStyle);
+      }
+
+      if (item.labelStyle?.textStyle && typeof item.labelStyle.textStyle === "object") {
+        Object.assign(titleSpan.style, item.labelStyle.textStyle);
+      }
+
+
       titleWrapper.appendChild(titleSpan);
       box.appendChild(titleWrapper);
 
@@ -127,6 +136,16 @@ class DraggableResizableContainer {
           } else {
             domElement.classList.remove("blink");
           }
+          
+          console.log(`Stage ${stage.clickable} applied to button ${btn.id}`);
+          if (stage.clickable) {
+            domElement.classList.add("click");
+            domElement.style.pointerEvents = "auto";
+          } else {
+            domElement.classList.remove("click");
+            domElement.style.pointerEvents = "none";
+          }
+
         };
 
         applyStageByIndex(btn, multiStageBtn);

@@ -1,6 +1,12 @@
 export interface ContainerItem {
   id: number | string;
   label: string;
+  labelStyle?: {
+    [key: string]: any; 
+    textStyle?: {
+      [key: string]: any; 
+    };
+  };
   buttons?: {
     id: string;
     label: string;
@@ -9,7 +15,11 @@ export interface ContainerItem {
     stages: {
       color: string;
       blinked?: boolean;
+      clickable?: boolean;
     }[];
+    buttonStyle?: {
+      [key: string]: any;
+    };
   }[];
 }
 
