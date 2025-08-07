@@ -48,7 +48,7 @@ export const reactCode = `import DraggableResizableContainer from 'draggable-res
 function App() {
   return (
     <DraggableResizableContainer
-      data={data}
+      data={data.containers}
       onButtonStageChanged={({ containerId, buttonId, stageIndex }) =>
         console.log("Button stage changed: \${containerId} > \${buttonId} > \${stageIndex}")
       }

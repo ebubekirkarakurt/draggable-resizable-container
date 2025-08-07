@@ -94,7 +94,7 @@ import DraggableResizableContainer from 'draggable-resizable-container';
 
 return (
     <DraggableResizableContainer
-      data={data}
+      data={data.containers}
       onButtonStageChanged={({ containerId, buttonId, stageIndex }) =>
         console.log(`Button stage changed: ${containerId} > ${buttonId} > ${stageIndex}`)
       }
