@@ -1,7 +1,7 @@
 .resizable-container {
-  width: 600px;
-  min-height: 250px;
-  height: auto;
+  max-width: auto;
+  min-width: auto;
+
   border: 1.5px solid #dee2e6;
   resize: both;
   overflow: hidden;
@@ -9,7 +9,7 @@
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  gap: 5%;
+  gap: 30px;
   background-color: #ffffff;
   padding: 15px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -37,6 +37,7 @@
 .small-box {
   width: 100%;
   max-width: 240px;
+  min-height: 220px;
   background-color: #adb5bd;
   display: flex;
   flex-direction: column;
