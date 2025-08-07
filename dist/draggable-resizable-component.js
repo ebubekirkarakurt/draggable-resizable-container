@@ -97,8 +97,8 @@ class DraggableResizableContainer {
       }
 
       if (item.labelStyle?.textStyle && typeof item.labelStyle.textStyle === "object") {
-        Object.assign(titleSpan.style, item.labelStyle.textStyle);
-      }
+      Object.assign(titleSpan.style, item.labelStyle.textStyle);
+    }
 
 
       titleWrapper.appendChild(titleSpan);
