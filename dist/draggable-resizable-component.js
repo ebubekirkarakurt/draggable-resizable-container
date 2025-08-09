@@ -85,6 +85,9 @@ class DraggableResizableContainer {
       const box = document.createElement("div");
       box.className = "small-box";
 
+      const topRightBox = document.createElement("div");
+      topRightBox.className = "top-right-box";
+
       const titleWrapper = document.createElement("div");
       titleWrapper.className = "title-wrapper";
 
@@ -97,12 +100,12 @@ class DraggableResizableContainer {
       }
 
       if (item.labelStyle?.textStyle && typeof item.labelStyle.textStyle === "object") {
-      Object.assign(titleSpan.style, item.labelStyle.textStyle);
-    }
+        Object.assign(titleSpan.style, item.labelStyle.textStyle);
+      }
 
-
-      titleWrapper.appendChild(titleSpan);
       box.appendChild(titleWrapper);
+      box.appendChild(topRightBox);
+      titleWrapper.appendChild(titleSpan);
 
       const btnWrapper = document.createElement("div");
       btnWrapper.className = "multiStageBtn-container";

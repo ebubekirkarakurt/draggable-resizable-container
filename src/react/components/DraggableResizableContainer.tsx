@@ -122,9 +122,11 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
         return (
           <div key={item.id} className="small-box">
             <div className="title-wrapper" style={wrapperStyle}>
-              <span id="list-title" style={textStyle || {}}>
-                {item.label}
-              </span>
+              <div className="top-right-box">
+                <span id="list-title" style={textStyle || {}}>
+                  {item.label}
+                </span>
+              </div>
             </div>
 
             <div className="multiStageBtn-container">
