@@ -310,6 +310,7 @@
     flex-wrap: nowrap;       
     gap: 8px;
     align-items: center;
+    padding: 10px;
   }
 
   .multiStageBtn {
@@ -320,13 +321,14 @@
     overflow: hidden;          
     text-overflow: ellipsis; 
     min-width: fit-content;   
-    max-width: 100%;         
+    max-width: 100%;     
+    padding: 8px 10px;
   }
 
   .title-wrapper::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
@@ -334,4 +336,5 @@
     background: #666;
     border-radius: 1px;
   }
+
 }

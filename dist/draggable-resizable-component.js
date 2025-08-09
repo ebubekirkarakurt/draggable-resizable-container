@@ -103,6 +103,7 @@ class DraggableResizableContainer {
         Object.assign(titleSpan.style, item.labelStyle.textStyle);
       }
 
+
       box.appendChild(titleWrapper);
       box.appendChild(topRightBox);
       titleWrapper.appendChild(titleSpan);
