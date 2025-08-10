@@ -5,6 +5,10 @@ import {
 } from "./DraggableResizableAlarmContainerProps";
 import "../styles/styles.css";
 
+const GREEN = "#44a148";
+
+const normColor = (c: string) => (c || "").toLowerCase().trim();
+
 const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = ({
   data,
   containerClassName,
@@ -76,40 +80,53 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
     return () => clearInterval(interval);
   }, [data]);
 
-  const handleStageClick = (btn: ContainerItem["buttons"][number], containerId: string | number) => {
-      setItems((prevItems) =>
-        prevItems.map((container) => {
-          if (container.id !== containerId) return container;
+  const handleStageClick = (
+    btn: ContainerItem["buttons"][number],
+    containerId: string | number
+  ) => {
+    setItems((prevItems) =>
+      prevItems.map((container) => {
+        if (container.id !== containerId) return container;
 
-          const updatedButtons = container.buttons.map((b) => {
-            if (b.id !== btn.id) return b;
+        const updatedButtons = container.buttons.map((b) => {
+          if (b.id !== btn.id) return b;
 
-            const nextStage = (b.currentStage + 1) % b.stages.length;
+          const nextStage = (b.currentStage + 1) % b.stages.length;
 
-            if (onButtonStageChanged) {
-              onButtonStageChanged({
-                containerId,
-                buttonId: b.id,
-                stageIndex: nextStage
-              });
-            }
-
-            return {
-              ...b,
-              currentStage: nextStage
-            };
-          });
+          if (onButtonStageChanged) {
+            onButtonStageChanged({
+              containerId,
+              buttonId: b.id,
+              stageIndex: nextStage
+            });
+          }
 
           return {
-            ...container,
-            buttons: updatedButtons
+            ...b,
+            currentStage: nextStage
           };
-        })
-      );
-    };
+        });
 
+        return {
+          ...container,
+          buttons: updatedButtons
+        };
+      })
+    );
+  };
 
+  const getIndicatorClass = (buttons: ContainerItem["buttons"]) => {
+    const allGreen = buttons.every(
+      (btn) => normColor(btn.stages[btn.currentStage].color) === GREEN
+    );
+    const anyNotGreen = buttons.some(
+      (btn) => normColor(btn.stages[btn.currentStage].color) !== GREEN
+    );
 
+    if (allGreen) return "status--green";
+    if (anyNotGreen) return "status--red smooth-blink";
+    return "status--green";
+  };
 
   return (
     <div
@@ -122,7 +139,7 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
         return (
           <div key={item.id} className="small-box">
             <div className="title-wrapper" style={wrapperStyle}>
-              <div className="top-right-box">
+              <div className={`top-right-box ${getIndicatorClass(item.buttons)}`}>
                 <span id="list-title" style={textStyle || {}}>
                   {item.label}
                 </span>
@@ -138,7 +155,10 @@ const DraggableResizableContainer: React.FC<DraggableResizableContainerProps> = 
                   <div
                     key={btn.id}
                     className={`multiStageBtn ${stage.blinked ? "blink" : ""}`}
-                    style={{ backgroundColor: stage.color, flexBasis: `${btn.width}%` }} 
+                    style={{
+                      backgroundColor: stage.color,
+                      flexBasis: `${btn.width}%`
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       if (!isClickable) return;

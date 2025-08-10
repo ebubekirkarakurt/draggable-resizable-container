@@ -88,6 +88,10 @@ class DraggableResizableContainer {
       const topRightBox = document.createElement("div");
       topRightBox.className = "top-right-box";
 
+      topRightBox.classList.add("status--green");
+
+      const buttonsRef = [];
+
       const titleWrapper = document.createElement("div");
       titleWrapper.className = "title-wrapper";
 
@@ -111,6 +115,38 @@ class DraggableResizableContainer {
       const btnWrapper = document.createElement("div");
       btnWrapper.className = "multiStageBtn-container";
 
+      function getActiveStage(btn) {
+        const idx = btn.currentStage ?? 0;
+        return btn.stages.find((s, i) => s.stageIndex === idx || i === idx);
+      }
+
+      function normColor(c) {
+        return (c || "").toLowerCase().trim();
+      }
+
+      function updateIndicatorStatus(topRightBox, buttons) {
+        const GREEN = "#44a148"; 
+        const RED = "#FF000";     
+
+        const allGreen = buttons.every(btn => {
+        const st = getActiveStage(btn);
+        return st && normColor(st.color) === GREEN;
+      });
+
+      const anyNotGreen = buttons.some(btn => {
+        const st = getActiveStage(btn);
+        return st && normColor(st.color) !== GREEN;
+      });
+
+      topRightBox.classList.remove("status--green", "status--red", "smooth-blink");
+
+      if (allGreen) {
+        topRightBox.classList.add("status--green");
+      } else if (anyNotGreen) {
+        topRightBox.classList.add("status--red", "smooth-blink");
+      }
+      }
+
       item.buttons.forEach((btn) => {
         const multiStageBtn = document.createElement("div");
         multiStageBtn.className = "multiStageBtn";
@@ -118,6 +154,8 @@ class DraggableResizableContainer {
         multiStageBtn.setAttribute("data-button-id", btn.id);
 
         btn.currentStage = btn.currentStage ?? 0;
+        
+        buttonsRef.push(btn);
 
         this.buttonMap[btn.id] = {
           dom: multiStageBtn,
@@ -153,6 +191,8 @@ class DraggableResizableContainer {
         };
 
         applyStageByIndex(btn, multiStageBtn);
+        updateIndicatorStatus(topRightBox, buttonsRef);
+        
 
         const btnTitle = document.createElement("span");
         btnTitle.textContent = btn.label;
