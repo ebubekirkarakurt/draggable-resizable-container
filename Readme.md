@@ -7,9 +7,9 @@ Provides interactive UI for dragging, resizing, and dynamic data display — ide
 
 ## 🎬 Live Preview
 
-A quick preview of the component in action:
+A quick preview of the component in action: [![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge)](https://resizable-draggable-container-demo.vercel.app)
 
-![Draggable Resizable Container Demo](./docs/public/demo.gif)
+![Draggable Resizable Container Demo](./docs/public/demo_updated.gif)
 
 ---
 
@@ -42,49 +42,44 @@ npm install draggable-resizable-container
 Below is an example of the `data` prop passed to `<DraggableResizableContainer />`.
 
 ```ts
-const data = {
+data: {
   containers: [
     {
       id: "container-1",
-      label: "Engine",
+      label: "Motor",
       labelStyle: {
-        backgroundColor: "#f0f0f0",  
-        border: "1px solid #ccc",     
-        borderRadius: "8px",       
-        padding: "6px 12px",         
-        textStyle: {
-          color: "#d32f2f",           
-          fontSize: "18px",           
-          fontWeight: "bold",        
-        }
+             
       },
       buttons: [
         {
           id: "btn-1-1",
-          label: "Overheat Alert",
-          width: 40,
-          currentStage: 1,
+          label: "Start",
+          currentStage: 0,
+          buttonStyle: {
+            borderRadius: "4px",
+            fontWeight: "bold"
+          },
           stages: [
-            { color: "green" },
-            { color: "red", blinked: true },
-            { color: "yellow", blinked: true }
+            { color: "#44A148", clickable: true },
+            { color: "red", blinked: true, clickable: true },
+            { color: "#c4b400", blinked: true, clickable: true }
           ]
         },
         {
           id: "btn-1-2",
-          label: "Maintenance Needed",
-          width: 60,
-          currentStage: 0,
+          label: "Stop",
+          currentStage: 1,
+          buttonStyle: {},
           stages: [
-            { color: "green" },
-            { color: "red", blinked: true },
-            { color: "yellow", blinked: true }
+            { color: "#44A148", clickable: true },
+            { color: "red", blinked: false, clickable: true },
+            { color: "#c4b400", blinked: false, clickable: true }
           ]
         }
       ]
     }
   ]
-};
+}
 ```
 
 ## React

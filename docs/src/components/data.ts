@@ -1,8 +1,8 @@
-export const data = `const data = {
+export const data = `data: {
   containers: [
     {
       id: "container-1",
-      label: "Engine",
+      label: "Motor",
       labelStyle: {
         backgroundColor: "#f0f0f0",  
         border: "1px solid #ccc",     
@@ -17,30 +17,33 @@ export const data = `const data = {
       buttons: [
         {
           id: "btn-1-1",
-          label: "Overheat Alert",
-          width: 40,
-          currentStage: 1,
+          label: "Start",
+          currentStage: 0,
+          buttonStyle: {
+            borderRadius: "4px",
+            fontWeight: "bold"
+          },
           stages: [
-            { color: "green" },
-            { color: "red", blinked: true },
-            { color: "yellow", blinked: true }
+            { color: "#44A148", clickable: true },
+            { color: "red", blinked: true, clickable: true },
+            { color: "#c4b400", blinked: true, clickable: true }
           ]
         },
         {
           id: "btn-1-2",
-          label: "Maintenance Needed",
-          width: 60,
-          currentStage: 0,
+          label: "Stop",
+          currentStage: 1,
+          buttonStyle: {},
           stages: [
-            { color: "green" },
-            { color: "red", blinked: true },
-            { color: "yellow", blinked: true }
+            { color: "#44A148", clickable: true },
+            { color: "red", blinked: false, clickable: true },
+            { color: "#c4b400", blinked: false, clickable: true }
           ]
         }
       ]
     }
   ]
-};
+}
 `
 
 export const reactCode = `import DraggableResizableContainer from 'draggable-resizable-container';
